@@ -63,31 +63,69 @@ const addBtn = document.querySelector('.add-btn')
 const addInput = document.querySelector('.add-input')
 const todoList = document.querySelector('.todo-list')
 
-addBtn.addEventListener('click', () =>{
-    if (addInput.value.length === 0){
-        alert('wright something')
-        return
-    }
+let allTodos =JSON.parse(localStorage.getItem('todos')) || []
+
+const drawItem = (itemText) =>{
     const li = document.createElement('li')
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between')
     const span = document.createElement('span')
-    span.textContent = addInput.value
+    span.textContent = itemText
     const button = document.createElement('button')
     button.classList.add('btn', 'btn-danger', 'btn-sm', 'delete-btn')
     button.textContent = 'Delete'
     li.append(span)
     li.append(button)
     todoList.append(li)
+}
+
+allTodos.forEach((todo) =>{
+    drawItem(todo)
+
+})
+
+
+addBtn.addEventListener('click', () =>{
+    drawItem(addInput.value)
+    allTodos = [... allTodos, addInput.value]
+    localStorage.setItem('todos', JSON.stringify(allTodos))
     addInput.value = ''
+
+})
+
+
+
+// addBtn.addEventListener('click', () =>{
+//     if (addInput.value.length === 0){
+//         alert('wright something')
+//         return
+//     }
+//     const li = document.createElement('li')
+//     li.classList.add('list-group-item', 'd-flex', 'justify-content-between')
+//     const span = document.createElement('span')
+//     span.textContent = addInput.value
+//     const button = document.createElement('button')
+//     button.classList.add('btn', 'btn-danger', 'btn-sm', 'delete-btn')
+//     button.textContent = 'Delete'
+//     li.append(span)
+//     li.append(button)
+//     todoList.append(li)
+//     addInput.value = ''
+//     deleteItem()
+// })
+
+const deleteItem = () =>{
     const deleteBtn = document.querySelectorAll('.delete-btn')
-    const listGroupItems = document.querySelectorAll('.list-group-item')
     deleteBtn.forEach((item, idx) =>{
         item.addEventListener('click', () =>{
-            listGroupItems[idx].remove()
+            deleteBtn[idx].parentElement.remove()
         })
     })
-    console.log(deleteBtn)
-})
+}
+deleteItem()
+
+
+
+
 
 
 
