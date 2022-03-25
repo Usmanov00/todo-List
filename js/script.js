@@ -92,7 +92,7 @@ addBtn.addEventListener('click', () =>{
             drawItem(addInput.value)
             allTodos = [... allTodos, addInput.value]
             localStorage.setItem('todos', JSON.stringify(allTodos))
-            addInput.value = шй
+            addInput.value = ''
             //deleteItem() // не уыерен чта функция должна быть здесь
         })
     })
