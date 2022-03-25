@@ -83,14 +83,26 @@ allTodos.forEach((todo) =>{
 
 })
 
-
 addBtn.addEventListener('click', () =>{
-    drawItem(addInput.value)
-    allTodos = [... allTodos, addInput.value]
-    localStorage.setItem('todos', JSON.stringify(allTodos))
-    addInput.value = ''
-
-})
+    if (addInput.value.length === 0){
+        alert('wright something')
+        return
+    }
+        addBtn.addEventListener('click', () =>{
+            drawItem(addInput.value)
+            allTodos = [... allTodos, addInput.value]
+            localStorage.setItem('todos', JSON.stringify(allTodos))
+            addInput.value = шй
+            //deleteItem() // не уыерен чта функция должна быть здесь
+        })
+    })
+// addBtn.addEventListener('click', () =>{
+//     drawItem(addInput.value)
+//     allTodos = [... allTodos, addInput.value]
+//     localStorage.setItem('todos', JSON.stringify(allTodos))
+//     addInput.value = ''
+//
+// })
 
 
 
