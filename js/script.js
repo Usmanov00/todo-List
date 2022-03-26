@@ -25,22 +25,25 @@ const getItem = () => {
 
 addBtn.addEventListener('click', () => {
     getItem()
+    deleteItem()
 })
 
 
 
 const deleteItem = () =>{
-    const listItemG = document.querySelectorAll('.list-group-item')
-    const deleteButton = document.querySelectorAll('.delete-btn')
-    deleteButton.forEach((item, idx) =>{
-        item.addEventListener('lick', () =>{
-            listItemG[idx].remove()
+    const listGroupItems = document.querySelectorAll('.list-group-item')
+    const deleteButtons = document.querySelectorAll('.delete-btn')
+    deleteButtons.forEach((item, idx) =>{
+        item.addEventListener('click', () =>{
+            listGroupItems[idx].remove()
         })
+
     })
-    console.log()
+
 }
 
 deleteItem()
+
 
 
 
