@@ -3,15 +3,15 @@ const addInput = document.querySelector('.add-input')
 const allMyBox = document.querySelector('.todo-list')
 
 
-const getItem = () => {
-    if (addInput.value.length === 0) {
-        alert('write something in a line')
-        return
-    }
+const getItem = (text) => {
+    // if (addInput.value.length === 0) {
+    //     alert('write something in a line')
+    //     return
+    // }
     const li = document.createElement('li')
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between')
     const span = document.createElement('span')
-    span.textContent = addInput.value
+    span.textContent = text
     console.log(span)
     const button = document.createElement('button')
     button.classList.add('btn', 'btn-danger', 'btn-sm', 'delete-btn')
@@ -19,13 +19,21 @@ const getItem = () => {
     li.append(span)
     li.append(button)
     allMyBox.append(li)
-    addInput.value = ''
 
 }
 
+let allTodo = JSON.parse(localStorage.getItem('todo')) || []
+
+allTodo.forEach((todo) =>{
+    getItem(todo)
+})
+
 addBtn.addEventListener('click', () => {
-    getItem()
+    getItem(addInput.value)
+    allTodo = [...allTodo, addInput.value]
     deleteItem()
+    localStorage.setItem('todo', JSON.stringify(allTodo))
+    addInput.value = ''
 })
 
 
@@ -37,12 +45,12 @@ const deleteItem = () =>{
         item.addEventListener('click', () =>{
             listGroupItems[idx].remove()
         })
-
     })
-
 }
 
+
 deleteItem()
+
 
 
 
