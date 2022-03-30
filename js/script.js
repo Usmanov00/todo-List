@@ -1,13 +1,38 @@
 const addBtn = document.querySelector('.add-btn')
 const addInput = document.querySelector('.add-input')
-const allMyBox = document.querySelector('.todo-list')
+const todoList = document.querySelector('.todo-list')
 
 
-const getItem = (text) => {
-    // if (addInput.value.length === 0) {
-    //     alert('write something in a line')
-    //     return
-    // }
+let allTodo = JSON.parse(localStorage.getItem('todos')) || []
+
+addBtn.addEventListener('click', () => {
+    allTodo = [...allTodo, addInput.value]
+    localStorage.setItem('todos', JSON.stringify(allTodo))
+    addInput.value = ''
+    drawList(allTodo)
+})
+
+addInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        newItem()
+    }
+})
+
+const newItem = () => {
+    if (addInput.value.trim() === '') {
+        alert('write something')
+        addInput.value = ''
+        return
+    }
+    allTodo = [...allTodo, addInput.value]
+    localStorage.setItem('todos', JSON.stringify(allTodo))
+    addInput.value = ''
+    drawList(allTodo)
+    console.log(addBtn)
+
+}
+
+const drawItem = (text) => {
     const li = document.createElement('li')
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between')
     const span = document.createElement('span')
@@ -18,38 +43,39 @@ const getItem = (text) => {
     button.textContent = 'Delete'
     li.append(span)
     li.append(button)
-    allMyBox.append(li)
+    todoList.append(li)
 
 }
 
-let allTodo = JSON.parse(localStorage.getItem('todo')) || []
-
-allTodo.forEach((todo) =>{
-    getItem(todo)
-})
-
-addBtn.addEventListener('click', () => {
-    getItem(addInput.value)
-    allTodo = [...allTodo, addInput.value]
-    deleteItem()
-    localStorage.setItem('todo', JSON.stringify(allTodo))
-    addInput.value = ''
-})
-
-
-
-const deleteItem = () =>{
-    const listGroupItems = document.querySelectorAll('.list-group-item')
+const deleteBtn = () => {
     const deleteButtons = document.querySelectorAll('.delete-btn')
-    deleteButtons.forEach((item, idx) =>{
-        item.addEventListener('click', () =>{
-            listGroupItems[idx].remove()
+    deleteButtons.forEach((item, idx) => {
+        item.addEventListener('click', () => {
+            item.parentElement.remove()
+            allTodo = allTodo.filter((TFS, idxTFS) => idx !== idxTFS)
+            localStorage.setItem('todos', JSON.stringify(allTodo))
+            drawList(allTodo)
         })
     })
 }
 
+const drawList = (array) => {
+    todoList.innerHTML = ''
+    array.forEach((todo) => {
+        drawItem(todo)
+    })
+    deleteBtn()
+}
 
-deleteItem()
+drawList(allTodo)
+
+
+
+
+
+
+
+
 
 
 
