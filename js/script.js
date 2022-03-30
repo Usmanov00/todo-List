@@ -5,12 +5,7 @@ const todoList = document.querySelector('.todo-list')
 
 let allTodo = JSON.parse(localStorage.getItem('todos')) || []
 
-addBtn.addEventListener('click', () => {
-    allTodo = [...allTodo, addInput.value]
-    localStorage.setItem('todos', JSON.stringify(allTodo))
-    addInput.value = ''
-    drawList(allTodo)
-})
+
 
 addInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -28,19 +23,25 @@ const newItem = () => {
     localStorage.setItem('todos', JSON.stringify(allTodo))
     addInput.value = ''
     drawList(allTodo)
-    console.log(addBtn)
 
 }
+addBtn.addEventListener('click', () => {
+   newItem()
+})
 
 const drawItem = (text) => {
     const li = document.createElement('li')
-    li.classList.add('list-group-item', 'd-flex', 'justify-content-between')
+    li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center')
+    let input = document.createElement('input')
+    input.classList.add('form-input-check', 'add-input')
+    input.type = 'checkbox'
     const span = document.createElement('span')
     span.textContent = text
     console.log(span)
     const button = document.createElement('button')
     button.classList.add('btn', 'btn-danger', 'btn-sm', 'delete-btn')
     button.textContent = 'Delete'
+    li.append(input)
     li.append(span)
     li.append(button)
     todoList.append(li)
@@ -69,8 +70,19 @@ const drawList = (array) => {
 
 drawList(allTodo)
 
-
-
+// const allTodos = [{age: 10, name : 'Roma'}, { age: 20, name: 'Igor'}]
+// console.log(allTodos[1])
+//
+//
+// const user = {
+//     user: 'userbek',
+//     age: 10
+// }
+// user.job = 'developer'
+// user["phone"] = '089098'
+// delete user.age
+// alert(user.user)
+// alert(user['user'])
 
 
 
