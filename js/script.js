@@ -25,8 +25,9 @@ const newItem = () => {
     drawList(allTodo)
 
 }
+
 addBtn.addEventListener('click', () => {
-   newItem()
+    newItem()
 })
 
 const drawItem = (text) => {
@@ -69,20 +70,6 @@ const drawList = (array) => {
 }
 
 drawList(allTodo)
-
-// const allTodos = [{age: 10, name : 'Roma'}, { age: 20, name: 'Igor'}]
-// console.log(allTodos[1])
-//
-//
-// const user = {
-//     user: 'userbek',
-//     age: 10
-// }
-// user.job = 'developer'
-// user["phone"] = '089098'
-// delete user.age
-// alert(user.user)
-// alert(user['user'])
 
 
 
