@@ -6,6 +6,9 @@ body {
     font-size: large;
     font-family: 'M PLUS 1', sans-serif;
 }
+.offset-4 {
+    margin-left: 0;
+}
 
 h1 {
     color: #fafafa;
@@ -33,5 +36,5 @@ h1 {
 .add-btn {
     background: #efc5d7;
     border: 1px solid #ef77a7;
-    color: #ef77a7;
+    color: #ef77a5;
 }
